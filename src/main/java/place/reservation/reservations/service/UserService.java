@@ -31,17 +31,6 @@ public class UserService {
     }
 
     public void createNewUser(UserDto userDto) {
-        System.out.println(userDto);
-
-
-        if (userDto.getFirstName().isBlank() || userDto.getFirstName() == null
-                || userDto.getLastName().isBlank() || userDto.getLastName() == null
-                || userDto.getEmail().isBlank() || userDto.getEmail() == null
-                || userDto.getPassword().isBlank() || userDto.getPassword() == null
-                || userDto.getPhoneNumber().isBlank() || userDto.getPhoneNumber() == null) {
-            System.out.println("hello");
-        }
-
         final User user = new User();
         user.setFirstName(userDto.getFirstName());
         user.setLastName(userDto.getLastName());

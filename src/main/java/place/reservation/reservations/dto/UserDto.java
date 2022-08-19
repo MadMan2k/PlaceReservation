@@ -1,85 +1,40 @@
 package place.reservation.reservations.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import place.reservation.reservations.entity.UserRole;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
 
+    @Size(min = 2, message="Name must be at least 2 characters long")
     private String firstName;
+
+    @Size(min = 2, message="Name must be at least 2 characters long")
     private String lastName;
+
+    @NotBlank(message = "Email can not be empty")
+    @Email(message = "Email must be valid")
     private String email;
+
+    @Size(min = 10, message = "Please enter your phone number")
     private String phoneNumber;
+
+    @Size(min = 3, max = 20, message = "Password must be between 3 and 20 characters")
+//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>€]).{8,20}$",
+//            message = "From 8 to 20 characters, at least one uppercase letter, one lowercase letter, one number and one special character")
     private String password;
+
+    private String passwordConfirmation;
+
     private UserRole userRole;
 
-    public UserDto() {
-    }
-
-    public UserDto(String firstName, String lastName, String email, String phoneNumber, String password, UserRole userRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.userRole = userRole;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", userRole=" + userRole +
-                '}';
-    }
 }

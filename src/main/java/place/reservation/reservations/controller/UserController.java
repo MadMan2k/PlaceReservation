@@ -2,12 +2,17 @@ package place.reservation.reservations.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import place.reservation.reservations.dto.UserDto;
+import place.reservation.reservations.dto.validator.PasswordValidator;
 import place.reservation.reservations.entity.User;
 import place.reservation.reservations.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -29,12 +34,28 @@ public class UserController {
     @GetMapping("/users/new")
     public String showNewUser(Model model) {
         UserDto userDto = new UserDto();
-        model.addAttribute("user", userDto);
+        model.addAttribute("userDto", userDto);
         return "newUser";
     }
 
     @PostMapping("/users/save")
-    public String saveUser(UserDto userDto) {
+    public String saveUser(@Valid UserDto userDto, Errors errors) {
+
+//        if (!(userDto.getPassword().equals(userDto.getPasswordConfirmation()))) {
+//            errors.rejectValue
+//                    ("passwordConfirmation", "NotMatch.Password", "Passwords are not matched");
+//        }
+
+        PasswordValidator.passwordValidation(userDto, errors);
+
+        if (errors.hasErrors()) {
+            for (FieldError fe : errors.getFieldErrors()) {
+                System.out.println("This is field error" + fe.getField() + " " + fe.getCode());
+            }
+
+            return "newUser";
+        }
+
         userService.createNewUser(userDto);
         return "redirect:/users";
     }
