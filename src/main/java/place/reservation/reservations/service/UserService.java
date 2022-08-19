@@ -13,10 +13,13 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(UserRepository userRepositoryInput) {
+        this.userRepository = userRepositoryInput;
     }
 
+    /**
+     * @return list of all users from DB
+     */
     public List<User> getAllUsers() {
         Iterable<User> usersIterable = userRepository.findAll();
         List<User> userList = new ArrayList<>();
@@ -30,6 +33,9 @@ public class UserService {
         return userList;
     }
 
+    /**
+     * @param userDto
+     */
     public void createNewUser(UserDto userDto) {
         final User user = new User();
         user.setFirstName(userDto.getFirstName());

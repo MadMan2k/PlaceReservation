@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import place.reservation.reservations.dto.UserDto;
 import place.reservation.reservations.dto.validator.PasswordValidator;
@@ -20,10 +19,14 @@ public class UserController {
 
     private UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserService userServiceInput) {
+        this.userService = userServiceInput;
     }
 
+    /**
+     * @param model
+     * @return all users page
+     */
     @GetMapping("/users")
     public String showUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
@@ -31,6 +34,10 @@ public class UserController {
         return "users";
     }
 
+    /**
+     * @param model
+     * @return new user creation page
+     */
     @GetMapping("/users/new")
     public String showNewUser(Model model) {
         UserDto userDto = new UserDto();
@@ -38,6 +45,11 @@ public class UserController {
         return "newUser";
     }
 
+    /**
+     * @param userDto
+     * @param errors
+     * @return all users page if no errors, otherwise stay at the same page
+     */
     @PostMapping("/users/save")
     public String saveUser(@Valid UserDto userDto, Errors errors) {
 

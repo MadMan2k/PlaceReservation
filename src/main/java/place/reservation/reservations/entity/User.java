@@ -21,20 +21,23 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "users")
 public class User {
 
+    private static final int TEXT_FIELD_MAX_LENGTH = 70;
+    private static final int PHONE_NUMBER_MAX_LENGTH = 20;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Column(nullable = false, length = 70, name = "first_name")
+    @Column(nullable = false, length = TEXT_FIELD_MAX_LENGTH, name = "first_name")
     private String firstName;
 
     @NotBlank
-    @Column(nullable = false, length = 70, name = "last_name")
+    @Column(nullable = false, length = TEXT_FIELD_MAX_LENGTH, name = "last_name")
     private String lastName;
 
     @NotBlank
-    @Column(nullable = false, unique = true, length = 70)
+    @Column(nullable = false, unique = true, length = TEXT_FIELD_MAX_LENGTH)
     private String email;
 
     @NotBlank
@@ -42,7 +45,7 @@ public class User {
     private String password;
 
     @NotBlank
-    @Column(length = 20, name = "phone_number")
+    @Column(length = PHONE_NUMBER_MAX_LENGTH, name = "phone_number")
     private String phoneNumber;
 
     @Column(nullable = false, name = "user_role")
