@@ -7,6 +7,7 @@ import place.reservation.reservations.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -46,5 +47,18 @@ public class UserService {
         user.setUserRole(userDto.getUserRole());
 
         userRepository.save(user);
+    }
+
+    /**
+     * @param id
+     * @throws UserNotFoundException
+     */
+    public void deleteUser(long id) throws UserNotFoundException {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.deleteById(id);
+        } else {
+            throw new UserNotFoundException("User ID " + id + " not found");
+        }
     }
 }

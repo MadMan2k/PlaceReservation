@@ -5,10 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import place.reservation.reservations.dto.UserDto;
 import place.reservation.reservations.dto.validator.PasswordValidator;
 import place.reservation.reservations.entity.User;
+import place.reservation.reservations.service.UserNotFoundException;
 import place.reservation.reservations.service.UserService;
 
 import javax.validation.Valid;
@@ -53,11 +55,6 @@ public class UserController {
     @PostMapping("/users/save")
     public String saveUser(@Valid UserDto userDto, Errors errors) {
 
-//        if (!(userDto.getPassword().equals(userDto.getPasswordConfirmation()))) {
-//            errors.rejectValue
-//                    ("passwordConfirmation", "NotMatch.Password", "Passwords are not matched");
-//        }
-
         PasswordValidator.passwordValidation(userDto, errors);
 
         if (errors.hasErrors()) {
@@ -72,19 +69,16 @@ public class UserController {
         return "redirect:/users";
     }
 
-//    @GetMapping("/users/new")
-//    public String showNewUser(Model model) {
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        return "newUser";
-//    }
-//
-//    @PostMapping("/users/save")
-//    public String saveUser(User user) {
-//        System.out.println(user);
-//
-//        return "redirect:/users";
-//    }
+    /**
+     * @param id
+     * @return redirect to users page
+     * @throws UserNotFoundException
+     */
+    @GetMapping("/user/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) throws UserNotFoundException {
+        userService.deleteUser(id);
+        return "redirect:/users";
+    }
 
 
 }
