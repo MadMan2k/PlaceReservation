@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userServiceInput) {
         this.userService = userServiceInput;
@@ -74,10 +74,17 @@ public class UserController {
      * @return redirect to users page
      * @throws UserNotFoundException
      */
-    @GetMapping("/user/delete/{id}")
+    @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") long id) throws UserNotFoundException {
         userService.deleteUser(id);
         return "redirect:/users";
+    }
+
+    @GetMapping("/users/edit/{id}")
+    public String editUser(@PathVariable("id") long id, Model model) throws UserNotFoundException {
+        UserDto userDtoWithoutPassword = userService.getUserDtoWithoutPasswordById(id);
+        model.addAttribute("userDto", userDtoWithoutPassword);
+        return "newUser";
     }
 
 

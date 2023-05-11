@@ -61,4 +61,24 @@ public class UserService {
             throw new UserNotFoundException("User ID " + id + " not found");
         }
     }
+
+    public User getUserById(long id) throws UserNotFoundException {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new UserNotFoundException("User ID " + id + " not found");
+        }
+    }
+
+    public UserDto getUserDtoWithoutPasswordById(long id) throws UserNotFoundException {
+        User user = getUserById(id);
+        UserDto userDtoWithoutPassword = new UserDto();
+        userDtoWithoutPassword.setFirstName(user.getFirstName());
+        userDtoWithoutPassword.setLastName(user.getLastName());
+        userDtoWithoutPassword.setEmail(user.getEmail());
+        userDtoWithoutPassword.setPhoneNumber(user.getPhoneNumber());
+        userDtoWithoutPassword.setUserRole(user.getUserRole());
+        return userDtoWithoutPassword;
+    }
 }
