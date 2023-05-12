@@ -10,7 +10,7 @@
 <div class="container">
     <div>
         <h2 class="text-center">Add new user</h2>
-        <form th:action="@{/users/save}" method="post" th:object="${userDto}" style="max-width: 600px; margin: 0 auto;">
+        <form th:action="@{save}" method="post" th:object="${userDto}" style="max-width: 600px; margin: 0 auto;">
             <div class="border border-secondary rounded p-3">
                 <!--                    <input type="hidden" th:field="*{id}" />-->
 

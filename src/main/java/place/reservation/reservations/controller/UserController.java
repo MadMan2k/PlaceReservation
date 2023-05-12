@@ -42,7 +42,7 @@ public class UserController {
      * @param model
      * @return new user creation page
      */
-    @GetMapping("/new")
+    @GetMapping("/new/")
     public String showNewUser(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("userDto", userDto);
@@ -54,7 +54,7 @@ public class UserController {
      * @param errors
      * @return all users page if no errors, otherwise stay at the same page
      */
-    @PostMapping("/save")
+    @PostMapping("/new/save")
     public String saveUser(@Valid UserDto userDto, Errors errors) {
 
         PasswordValidator.passwordValidation(userDto, errors);
@@ -82,7 +82,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/edit/{id}/")
     public String editUser(@PathVariable("id") long id, Model model) throws UserNotFoundException {
         UserDto userDtoWithoutPassword = userService.getUserDtoWithoutPasswordById(id);
         model.addAttribute("userDto", userDtoWithoutPassword);
