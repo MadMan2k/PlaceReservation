@@ -81,4 +81,19 @@ public class UserService {
         userDtoWithoutPassword.setUserRole(user.getUserRole());
         return userDtoWithoutPassword;
     }
+
+    public void updateUser(UserDto updatedUserDtoWithoutPassword, long id) throws UserNotFoundException {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            User updatedUser = user.get();
+            updatedUser.setFirstName(updatedUserDtoWithoutPassword.getFirstName());
+            updatedUser.setLastName(updatedUserDtoWithoutPassword.getLastName());
+            updatedUser.setEmail(updatedUserDtoWithoutPassword.getEmail());
+            updatedUser.setPhoneNumber(updatedUserDtoWithoutPassword.getPhoneNumber());
+            updatedUser.setUserRole(updatedUserDtoWithoutPassword.getUserRole());
+            userRepository.save(updatedUser);
+        } else {
+            throw new UserNotFoundException("User ID " + id + " not found");
+        }
+    }
 }

@@ -89,5 +89,11 @@ public class UserController {
         return "newUser";
     }
 
+    @PostMapping("/edit/{id}/save")
+    public String updateUser(@PathVariable("id") long id, UserDto updatedUserDtoWithoutPassword , Model model) throws UserNotFoundException {
+        userService.updateUser(updatedUserDtoWithoutPassword, id);
+
+        return "redirect:/users";
+    }
 
 }
