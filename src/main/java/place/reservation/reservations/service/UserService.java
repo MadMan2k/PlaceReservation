@@ -62,6 +62,11 @@ public class UserService {
         }
     }
 
+    /**
+     * @param id
+     * @return user
+     * @throws UserNotFoundException
+     */
     public User getUserById(long id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
@@ -71,6 +76,11 @@ public class UserService {
         }
     }
 
+    /**
+     * @param id
+     * @return userDTO without password
+     * @throws UserNotFoundException
+     */
     public UserDto getUserDtoWithoutPasswordById(long id) throws UserNotFoundException {
         User user = getUserById(id);
         UserDto userDtoWithoutPassword = new UserDto();
@@ -82,6 +92,11 @@ public class UserService {
         return userDtoWithoutPassword;
     }
 
+    /**
+     * @param updatedUserDtoWithoutPassword
+     * @param id
+     * @throws UserNotFoundException
+     */
     public void updateUser(UserDto updatedUserDtoWithoutPassword, long id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {

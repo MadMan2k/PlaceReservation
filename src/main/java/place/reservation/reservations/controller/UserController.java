@@ -2,7 +2,6 @@ package place.reservation.reservations.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,15 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import place.reservation.reservations.dto.UserDto;
 import place.reservation.reservations.dto.validator.PasswordValidator;
 import place.reservation.reservations.entity.User;
-import place.reservation.reservations.entity.UserRole;
 import place.reservation.reservations.service.UserNotFoundException;
 import place.reservation.reservations.service.UserService;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/users")
@@ -88,6 +83,12 @@ public class UserController {
         return "redirect:/users";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return newUser page
+     * @throws UserNotFoundException
+     */
     @GetMapping("/edit/{id}/")
     public String editUser(@PathVariable("id") long id, Model model) throws UserNotFoundException {
         UserDto userDtoWithoutPassword = userService.getUserDtoWithoutPasswordById(id);
@@ -95,8 +96,17 @@ public class UserController {
         return "newUser";
     }
 
+    /**
+     * @param id
+     * @param userDtoWithoutPassword
+     * @param errors
+     * @return users page if ok, same page if not ok
+     * @throws UserNotFoundException
+     */
     @PostMapping("/edit/{id}/save")
-    public String updateUser(@PathVariable("id") long id, @Valid @ModelAttribute("userDto") UserDto userDtoWithoutPassword, Errors errors) throws UserNotFoundException {
+    public String updateUser(@PathVariable("id") long id,
+                             @Valid @ModelAttribute("userDto") UserDto userDtoWithoutPassword,
+                             Errors errors) throws UserNotFoundException {
 
         System.out.println(userDtoWithoutPassword.toString());
 
