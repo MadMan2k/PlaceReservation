@@ -2,20 +2,26 @@ package place.reservation.reservations.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import place.reservation.reservations.dto.UserDto;
 import place.reservation.reservations.dto.validator.PasswordValidator;
 import place.reservation.reservations.entity.User;
+import place.reservation.reservations.entity.UserRole;
 import place.reservation.reservations.service.UserNotFoundException;
 import place.reservation.reservations.service.UserService;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/users")
@@ -61,7 +67,7 @@ public class UserController {
 
         if (errors.hasErrors()) {
             for (FieldError fe : errors.getFieldErrors()) {
-                System.out.println("This is field error" + fe.getField() + " " + fe.getCode());
+                System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");
             }
 
             return "newUser";
@@ -90,8 +96,19 @@ public class UserController {
     }
 
     @PostMapping("/edit/{id}/save")
-    public String updateUser(@PathVariable("id") long id, UserDto updatedUserDtoWithoutPassword , Model model) throws UserNotFoundException {
-        userService.updateUser(updatedUserDtoWithoutPassword, id);
+    public String updateUser(@PathVariable("id") long id, @Valid @ModelAttribute("userDto") UserDto userDtoWithoutPassword, Errors errors) throws UserNotFoundException {
+
+        System.out.println(userDtoWithoutPassword.toString());
+
+        if (errors.hasErrors()) {
+            for (FieldError fe : errors.getFieldErrors()) {
+                System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");
+            }
+
+            return "newUser";
+        }
+
+        userService.updateUser(userDtoWithoutPassword, id);
 
         return "redirect:/users";
     }
