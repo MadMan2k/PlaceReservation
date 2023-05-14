@@ -109,7 +109,7 @@ public class UserController {
                              @Valid @ModelAttribute("userDto") UserDto userDtoWithoutPassword,
                              Errors errors) throws UserNotFoundException {
 
-        EmailValidator.emailValidation(userDtoWithoutPassword, errors, userService);
+        EmailValidator.emailValidation(id, userDtoWithoutPassword, errors, userService);
 
         if (errors.hasErrors()) {
             for (FieldError fe : errors.getFieldErrors()) {

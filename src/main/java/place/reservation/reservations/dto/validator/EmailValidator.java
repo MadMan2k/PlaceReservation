@@ -12,8 +12,8 @@ public class EmailValidator {
 //        this.userService = userServiceInput;
 //    }
 
-    public static void emailValidation (UserDto userDto, Errors errors, UserService userService) {
-        boolean isEmailUnique = userService.isEmailUnique(userDto.getEmail());
+    public static void emailValidation (long id, UserDto userDto, Errors errors, UserService userService) {
+        boolean isEmailUnique = userService.isEmailUnique(id, userDto.getEmail());
         if (!isEmailUnique) {
             errors.rejectValue("email", "AlreadyExist.Email", "Email exist already");
         }

@@ -112,9 +112,11 @@ public class UserService {
         }
     }
 
-    public boolean isEmailUnique(String email) {
+    public boolean isEmailUnique(long id, String email) {
         Optional<User> user = userRepository.findByEmail(email);
-
-        return user.isEmpty();
+        if (user.isPresent()) {
+            return user.get().getId().equals(id);
+        }
+        return true;
     }
 }
