@@ -11,15 +11,23 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, St
 
     private DataType dataType;
 
-    public UniqueValueValidator(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UniqueValueValidator(UserRepository inputUserRepository) {
+        this.userRepository = inputUserRepository;
     }
 
+    /**
+     * @param constraintAnnotation
+     */
     @Override
     public void initialize(UniqueValue constraintAnnotation) {
         this.dataType = constraintAnnotation.dataType();
     }
 
+    /**
+     * @param value
+     * @param constraintValidatorContext
+     * @return
+     */
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if (value == null) {
@@ -29,10 +37,6 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue, St
         System.out.println("THIS IS VALUE FROM VALIDATOR : " + value);
         System.out.println("DATATYPE IS : " + dataType.toString());
         //TODO
-
-        switch (dataType) {
-            case EMAIL:
-        }
 
         return false;
     }

@@ -3,8 +3,6 @@ package place.reservation.reservations.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import place.reservation.reservations.dto.constraint.DataType;
-import place.reservation.reservations.dto.constraint.UniqueValue;
 import place.reservation.reservations.entity.UserRole;
 
 import javax.validation.constraints.Email;

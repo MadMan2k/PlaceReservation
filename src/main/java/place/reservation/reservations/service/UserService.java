@@ -112,6 +112,11 @@ public class UserService {
         }
     }
 
+    /**
+     * @param id
+     * @param email
+     * @return isEmailUnique boolean
+     */
     public boolean isEmailUnique(long id, String email) {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {
@@ -120,6 +125,11 @@ public class UserService {
         return true;
     }
 
+    /**
+     * @param id
+     * @param phoneNumber
+     * @return isPhoneNumberUnique boolean
+     */
     public boolean isPhoneNumberUnique(long id, String phoneNumber) {
         Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
         if (user.isPresent()) {
