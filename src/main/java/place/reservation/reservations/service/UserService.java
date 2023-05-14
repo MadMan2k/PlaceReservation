@@ -119,4 +119,12 @@ public class UserService {
         }
         return true;
     }
+
+    public boolean isPhoneNumberUnique(long id, String phoneNumber) {
+        Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
+        if (user.isPresent()) {
+            return user.get().getId().equals(id);
+        }
+        return true;
+    }
 }

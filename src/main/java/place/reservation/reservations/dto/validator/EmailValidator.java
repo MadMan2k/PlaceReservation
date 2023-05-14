@@ -6,12 +6,6 @@ import place.reservation.reservations.service.UserService;
 
 public class EmailValidator {
 
-//    private final UserService userService;
-//
-//    public EmailValidator(UserService userServiceInput) {
-//        this.userService = userServiceInput;
-//    }
-
     public static void emailValidation (long id, UserDto userDto, Errors errors, UserService userService) {
         boolean isEmailUnique = userService.isEmailUnique(id, userDto.getEmail());
         if (!isEmailUnique) {

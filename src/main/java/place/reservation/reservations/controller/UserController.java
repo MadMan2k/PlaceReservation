@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import place.reservation.reservations.dto.UserDto;
 import place.reservation.reservations.dto.validator.EmailValidator;
 import place.reservation.reservations.dto.validator.PasswordValidator;
+import place.reservation.reservations.dto.validator.PhoneNumberValidator;
 import place.reservation.reservations.entity.User;
 import place.reservation.reservations.service.UserNotFoundException;
 import place.reservation.reservations.service.UserService;
@@ -110,6 +111,8 @@ public class UserController {
                              Errors errors) throws UserNotFoundException {
 
         EmailValidator.emailValidation(id, userDtoWithoutPassword, errors, userService);
+        PhoneNumberValidator.phoneNumberValidation(id, userDtoWithoutPassword, errors, userService);
+
 
         if (errors.hasErrors()) {
             for (FieldError fe : errors.getFieldErrors()) {
