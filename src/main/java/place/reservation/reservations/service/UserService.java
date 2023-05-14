@@ -111,4 +111,10 @@ public class UserService {
             throw new UserNotFoundException("User ID " + id + " not found");
         }
     }
+
+    public boolean isEmailUnique(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+
+        return user.isEmpty();
+    }
 }

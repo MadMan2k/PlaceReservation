@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import place.reservation.reservations.dto.UserDto;
+import place.reservation.reservations.dto.validator.EmailValidator;
 import place.reservation.reservations.dto.validator.PasswordValidator;
 import place.reservation.reservations.entity.User;
 import place.reservation.reservations.service.UserNotFoundException;
@@ -108,7 +109,7 @@ public class UserController {
                              @Valid @ModelAttribute("userDto") UserDto userDtoWithoutPassword,
                              Errors errors) throws UserNotFoundException {
 
-        System.out.println(userDtoWithoutPassword.toString());
+        EmailValidator.emailValidation(userDtoWithoutPassword, errors, userService);
 
         if (errors.hasErrors()) {
             for (FieldError fe : errors.getFieldErrors()) {
