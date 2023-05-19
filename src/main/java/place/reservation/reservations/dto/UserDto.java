@@ -22,9 +22,11 @@ public class UserDto {
 
 
     @Size(min = NAME_MIN_LENGTH, message = "Name must be at least " + NAME_MIN_LENGTH + " characters long")
+    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$", message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
     private String firstName;
 
     @Size(min = NAME_MIN_LENGTH, message = "Name must be at least " + NAME_MIN_LENGTH + " characters long")
+    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$", message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
     private String lastName;
 
 //    @UniqueValue(dataType = DataType.EMAIL)
