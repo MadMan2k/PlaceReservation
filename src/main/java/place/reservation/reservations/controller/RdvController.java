@@ -25,4 +25,9 @@ public class RdvController {
         model.addAttribute("rdvs", allRdvs);
         return "rdvs";
     }
+
+//    @GetMapping("/new/")
+//    public String showNewRdv() {
+//
+//    }
 }

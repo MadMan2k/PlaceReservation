@@ -25,10 +25,6 @@ import java.time.LocalTime;
 @Table(name = "rdvs")
 public class Rdv {
 
-    public enum Status {
-        ACTIVE, PASSED, CANCELED
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -42,6 +38,9 @@ public class Rdv {
     @Column(name = "client_email", nullable = false)
     private String clientEmail;
 
+    @Column(name = "client_phone_number", nullable = false)
+    private String clientPhoneNumber;
+
     @Column(name = "date", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
@@ -52,4 +51,7 @@ public class Rdv {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "city_id", nullable = false)
     private City city;
+
+    @Column(name = "rdv_status", nullable = false)
+    private RdvStatus rdvStatus;
 }

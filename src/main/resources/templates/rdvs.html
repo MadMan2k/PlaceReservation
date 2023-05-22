@@ -18,9 +18,11 @@
           <th>First name</th>
           <th>Last name</th>
           <th>Email</th>
+          <th>Phone number</th>
           <th>Date</th>
           <th>Time</th>
           <th>City</th>
+          <th>Status</th>
           <th></th>
         </tr>
         </thead>
@@ -31,9 +33,11 @@
             <td>[[${rdv.clientFirstName}]]</td>
             <td>[[${rdv.clientLastName}]]</td>
             <td>[[${rdv.clientEmail}]]</td>
+            <td>[[${rdv.clientPhoneNumber}]]</td>
             <td>[[${rdv.date}]]</td>
             <td>[[${rdv.time}]]</td>
             <td>[[${rdv.city.name}]]</td>
+            <td>[[${rdv.rdvStatus}]]</td>
             <td>
               <a class="btn btn-primary btn-sm" th:href="@{'rdvs/edit/' + ${rdv.id} + '/'}">Edit</a>
               <a class="btn btn-danger btn-sm"
