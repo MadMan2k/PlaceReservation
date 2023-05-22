@@ -14,3 +14,6 @@ INSERT INTO cities (name) VALUES ('Nantes');
 INSERT INTO cities (name) VALUES ('Montpellier');
 INSERT INTO cities (name) VALUES ('Strasbourg');
 INSERT INTO cities (name) VALUES ('Lille');
+
+INSERT INTO rdvs (client_first_name, client_last_name, client_email, date, time, city_id)
+VALUES  ('Emmanuel', 'Macron', 'emacron@gmail.com', '2023-05-01', '10:00', (SELECT id FROM cities WHERE name = 'Lyon'))
