@@ -27,5 +27,5 @@ public class Procedure {
     private String name;
 
     @Column(name = "duration_minutes")
-    private int durationMinutes;
+    private String durationMinutes;
 }
