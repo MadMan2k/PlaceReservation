@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>User management</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+  <div class="text-center">
+    <div><h1>Users management</h1></div>
+    <div class="mb-3"><a th:href="@{/procedures/new/}" class="h4">Create new procedure</a></div>
+    <div>
+      <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Procedure</th>
+          <th>Duration (min)</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="procedure:${procedures}">
+          <tr>
+            <td>[[${procedure.id}]]</td>
+            <td>[[${procedure.name}]]</td>
+            <td>[[${procedure.durationMinutes}]]</td>
+            <td>
+              <a class="btn btn-primary btn-sm" th:href="@{'procedures/edit/' + ${procedure.id} + '/'}">Edit</a>
+              <a class="btn btn-danger btn-sm"
+                 th:attr="onclick=|return confirm('Are you sure you want to delete procedure \u00AB${procedure.name}\u00BB ?')|"
+                 th:href="@{'/procedures/delete/' + ${procedure.id}}">Delete</a>
+            </td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

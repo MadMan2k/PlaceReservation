@@ -1,7 +1,11 @@
 package place.reservation.reservations.service;
 
 import org.springframework.stereotype.Service;
+import place.reservation.reservations.entity.Procedure;
 import place.reservation.reservations.repository.ProcedureRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProcedureService {
@@ -10,5 +14,18 @@ public class ProcedureService {
 
     public ProcedureService(ProcedureRepository procedureRepositoryInput) {
         this.procedureRepository = procedureRepositoryInput;
+    }
+
+    public List<Procedure> getAllProcedures() {
+        Iterable<Procedure> proceduresIterable = procedureRepository.findAll();
+        List<Procedure> proceduresList = new ArrayList<>();
+
+        for (Procedure procedure : proceduresIterable) {
+            if (procedure != null) {
+                proceduresList.add(procedure);
+            }
+        }
+
+        return proceduresList;
     }
 }

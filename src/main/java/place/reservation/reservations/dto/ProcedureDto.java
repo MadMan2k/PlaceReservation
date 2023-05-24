@@ -11,5 +11,5 @@ public class ProcedureDto {
 
     private String name;
 
-    private int duration;
+    private int durationMinutes;
 }
