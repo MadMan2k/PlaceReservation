@@ -5,10 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import place.reservation.reservations.dto.ProcedureDto;
 import place.reservation.reservations.entity.Procedure;
+import place.reservation.reservations.service.ProcedureNotFoundException;
 import place.reservation.reservations.service.ProcedureService;
 
 import javax.validation.Valid;
@@ -51,5 +53,11 @@ public class ProcedureController {
         procedureService.saveNewProcedure(procedureDto);
         return "redirect:/procedures";
 
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteProcedure(@PathVariable("id") long id) throws ProcedureNotFoundException {
+        procedureService.deleteProcedure(id);
+        return "redirect:/procedures";
     }
 }

@@ -7,6 +7,7 @@ import place.reservation.reservations.repository.ProcedureRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProcedureService {
@@ -36,5 +37,14 @@ public class ProcedureService {
         procedure.setDurationMinutes(procedureDto.getDurationMinutes());
 
         procedureRepository.save(procedure);
+    }
+
+    public void deleteProcedure(long id) throws ProcedureNotFoundException {
+        Optional<Procedure> procedure = procedureRepository.findById(id);
+        if (procedure.isPresent()) {
+            procedureRepository.deleteById(id);
+        } else {
+            throw new ProcedureNotFoundException("Procedure ID " + id + " not found");
+        }
     }
 }
