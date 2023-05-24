@@ -10,14 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "cities")
-public class City {
+@Table(name = "procedures")
+public class Procedure {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +25,7 @@ public class City {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "duration_minutes")
+    private int durationMinutes;
 }

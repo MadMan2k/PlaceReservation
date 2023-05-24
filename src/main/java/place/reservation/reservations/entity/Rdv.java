@@ -49,8 +49,8 @@ public class Rdv {
     private LocalTime time;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
+    @JoinColumn(name = "procedures_id", nullable = false)
+    private Procedure procedure;
 
     @Column(name = "rdv_status", nullable = false)
     private RdvStatus rdvStatus;
