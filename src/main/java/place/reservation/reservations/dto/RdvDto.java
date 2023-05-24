@@ -3,6 +3,7 @@ package place.reservation.reservations.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import place.reservation.reservations.entity.Procedure;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -36,4 +37,6 @@ public class RdvDto {
     private LocalDate date;
 
     private LocalTime time;
+
+    private Procedure procedure;
 }

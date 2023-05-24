@@ -20,8 +20,9 @@
           <th>Email</th>
           <th>Phone number</th>
           <th>Date</th>
-          <th>Time</th>
           <th>Procedure</th>
+          <th>Time</th>
+          <th>Duration</th>
           <th>Status</th>
           <th></th>
         </tr>
@@ -35,8 +36,9 @@
             <td>[[${rdv.clientEmail}]]</td>
             <td>[[${rdv.clientPhoneNumber}]]</td>
             <td>[[${rdv.date}]]</td>
-            <td>[[${rdv.time}]]</td>
             <td>[[${rdv.procedure.name}]]</td>
+            <td>[[${rdv.time}]]</td>
+            <td>[[${rdv.procedure.durationMinutes}]]</td>
             <td>[[${rdv.rdvStatus}]]</td>
             <td>
               <a class="btn btn-primary btn-sm" th:href="@{'rdvs/edit/' + ${rdv.id} + '/'}">Edit</a>
