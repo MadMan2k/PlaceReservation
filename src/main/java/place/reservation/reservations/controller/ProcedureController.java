@@ -5,10 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import place.reservation.reservations.dto.ProcedureDto;
+import place.reservation.reservations.dto.validator.ProcedureValidator;
 import place.reservation.reservations.entity.Procedure;
 import place.reservation.reservations.service.ProcedureNotFoundException;
 import place.reservation.reservations.service.ProcedureService;
@@ -66,5 +68,22 @@ public class ProcedureController {
         ProcedureDto procedureDto = procedureService.getProcedureById(id);
         model.addAttribute("procedureDto", procedureDto);
         return "newProcedure";
+    }
+
+    @PostMapping("/edit/{id}/save")
+    public String updateProcedure(@PathVariable("id") long id,
+                                  @Valid @ModelAttribute("procedureDto") ProcedureDto procedureDto,
+                                  Errors errors) throws ProcedureNotFoundException {
+        ProcedureValidator.procedureValidation(id, procedureDto, errors, procedureService);
+
+        if (errors.hasErrors()) {
+            for (FieldError fe : errors.getFieldErrors()) {
+                System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");
+            }
+            return "newProcedure";
+        }
+
+        procedureService.updateProcedure(procedureDto, id);
+        return "redirect:/procedures";
     }
 }

@@ -59,4 +59,25 @@ public class ProcedureService {
             throw new ProcedureNotFoundException("Procedure ID " + id + " not found");
         }
     }
+
+    public boolean isNameUnique(long id, String name) {
+        Optional<Procedure> procedure = procedureRepository.findByName(name);
+        if (procedure.isPresent()) {
+            return procedure.get().getId().equals(id);
+        }
+        return true;
+    }
+
+    public void updateProcedure(ProcedureDto procedureDto, long id) throws ProcedureNotFoundException {
+        Optional<Procedure> procedure = procedureRepository.findById(id);
+        if (procedure.isPresent()) {
+            Procedure updatedProcedure = procedure.get();
+            updatedProcedure.setName(procedureDto.getName());
+            updatedProcedure.setPrice(procedureDto.getPrice());
+            updatedProcedure.setDurationInMinutes(procedureDto.getDurationInMinutes());
+            procedureRepository.save(updatedProcedure);
+        } else {
+            throw new ProcedureNotFoundException("Procedure ID " + id + " not found");
+        }
+    }
 }
