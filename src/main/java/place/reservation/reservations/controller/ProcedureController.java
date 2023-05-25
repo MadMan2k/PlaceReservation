@@ -60,4 +60,11 @@ public class ProcedureController {
         procedureService.deleteProcedure(id);
         return "redirect:/procedures";
     }
+
+    @GetMapping("edit/{id}")
+    public String editProcedure(@PathVariable("id") long id, Model model) throws ProcedureNotFoundException {
+        ProcedureDto procedureDto = procedureService.getProcedureById(id);
+        model.addAttribute("procedureDto", procedureDto);
+        return "newProcedure";
+    }
 }

@@ -26,6 +26,9 @@ public class Procedure {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "duration_minutes")
-    private String durationMinutes;
+    @Column(name = "duration_in_minutes")
+    private int durationInMinutes;
+
+    @Column(name = "price")
+    private double price;
 }

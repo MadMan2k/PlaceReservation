@@ -54,4 +54,7 @@ public class Rdv {
 
     @Column(name = "rdv_status", nullable = false)
     private RdvStatus rdvStatus;
+
+    @Column(name = "discount")
+    private double discount;
 }

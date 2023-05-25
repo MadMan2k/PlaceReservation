@@ -34,7 +34,7 @@ public class ProcedureService {
     public void saveNewProcedure(ProcedureDto procedureDto) {
         final Procedure procedure = new Procedure();
         procedure.setName(procedureDto.getName());
-        procedure.setDurationMinutes(procedureDto.getDurationMinutes());
+        procedure.setDurationInMinutes(procedureDto.getDurationInMinutes());
 
         procedureRepository.save(procedure);
     }
@@ -43,6 +43,18 @@ public class ProcedureService {
         Optional<Procedure> procedure = procedureRepository.findById(id);
         if (procedure.isPresent()) {
             procedureRepository.deleteById(id);
+        } else {
+            throw new ProcedureNotFoundException("Procedure ID " + id + " not found");
+        }
+    }
+
+    public ProcedureDto getProcedureById(long id) throws ProcedureNotFoundException {
+        Optional<Procedure> procedure = procedureRepository.findById(id);
+        ProcedureDto procedureDto = new ProcedureDto();
+        if (procedure.isPresent()) {
+            procedureDto.setName(procedure.get().getName());
+            procedureDto.setDurationInMinutes(procedure.get().getDurationInMinutes());
+            return procedureDto;
         } else {
             throw new ProcedureNotFoundException("Procedure ID " + id + " not found");
         }
