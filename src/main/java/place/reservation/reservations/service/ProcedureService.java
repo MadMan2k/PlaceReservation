@@ -9,15 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for handling procedures.
+ */
 @Service
 public class ProcedureService {
 
     private final ProcedureRepository procedureRepository;
 
+    /**
+     * Constructor for ProcedureService.
+     *
+     * @param procedureRepositoryInput the procedure repository
+     */
     public ProcedureService(ProcedureRepository procedureRepositoryInput) {
         this.procedureRepository = procedureRepositoryInput;
     }
 
+    /**
+     * Retrieves all procedures.
+     *
+     * @return the list of all procedures
+     */
     public List<Procedure> getAllProcedures() {
         Iterable<Procedure> proceduresIterable = procedureRepository.findAll();
         List<Procedure> proceduresList = new ArrayList<>();
@@ -31,6 +44,11 @@ public class ProcedureService {
         return proceduresList;
     }
 
+    /**
+     * Saves a new procedure.
+     *
+     * @param procedureDto the procedure DTO to save
+     */
     public void saveNewProcedure(ProcedureDto procedureDto) {
         final Procedure procedure = new Procedure();
         procedure.setName(procedureDto.getName());
@@ -39,6 +57,12 @@ public class ProcedureService {
         procedureRepository.save(procedure);
     }
 
+    /**
+     * Deletes a procedure by ID.
+     *
+     * @param id the ID of the procedure to delete
+     * @throws ProcedureNotFoundException if the procedure is not found
+     */
     public void deleteProcedure(long id) throws ProcedureNotFoundException {
         Optional<Procedure> procedure = procedureRepository.findById(id);
         if (procedure.isPresent()) {
@@ -48,6 +72,13 @@ public class ProcedureService {
         }
     }
 
+    /**
+     * Retrieves a procedure by ID.
+     *
+     * @param id the ID of the procedure to retrieve
+     * @return the procedure DTO
+     * @throws ProcedureNotFoundException if the procedure is not found
+     */
     public ProcedureDto getProcedureById(long id) throws ProcedureNotFoundException {
         Optional<Procedure> procedure = procedureRepository.findById(id);
         ProcedureDto procedureDto = new ProcedureDto();
@@ -60,6 +91,13 @@ public class ProcedureService {
         }
     }
 
+    /**
+     * Checks if a procedure name is unique.
+     *
+     * @param id   the ID of the procedure
+     * @param name the name of the procedure
+     * @return true if the name is unique, false otherwise
+     */
     public boolean isNameUnique(long id, String name) {
         Optional<Procedure> procedure = procedureRepository.findByName(name);
         if (procedure.isPresent()) {
@@ -68,6 +106,13 @@ public class ProcedureService {
         return true;
     }
 
+    /**
+     * Updates a procedure.
+     *
+     * @param procedureDto the updated procedure DTO
+     * @param id           the ID of the procedure to update
+     * @throws ProcedureNotFoundException if the procedure is not found
+     */
     public void updateProcedure(ProcedureDto procedureDto, long id) throws ProcedureNotFoundException {
         Optional<Procedure> procedure = procedureRepository.findById(id);
         if (procedure.isPresent()) {

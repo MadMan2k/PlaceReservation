@@ -32,7 +32,7 @@ public class UserController {
 
     /**
      * @param model
-     * @return all users page
+     * @return all users view
      */
     @GetMapping(value = {"/", ""})
     public String showUsers(Model model) {
@@ -43,7 +43,7 @@ public class UserController {
 
     /**
      * @param model
-     * @return new user creation page
+     * @return new user creation view
      */
     @GetMapping("/new/")
     public String showNewUser(Model model) {
@@ -55,7 +55,7 @@ public class UserController {
     /**
      * @param userDto
      * @param errors
-     * @return all users page if no errors, otherwise stay at the same page
+     * @return all users view if no errors, otherwise stay at the same view
      */
     @PostMapping("/new/save")
     public String saveUser(@Valid UserDto userDto, Errors errors) {
@@ -76,7 +76,7 @@ public class UserController {
 
     /**
      * @param id
-     * @return redirect to users page
+     * @return redirect to users view
      * @throws UserNotFoundException
      */
     @GetMapping("/delete/{id}")
@@ -88,7 +88,7 @@ public class UserController {
     /**
      * @param id
      * @param model
-     * @return newUser page
+     * @return edit user view
      * @throws UserNotFoundException
      */
     @GetMapping("/edit/{id}/")
@@ -102,7 +102,7 @@ public class UserController {
      * @param id
      * @param userDtoWithoutPassword
      * @param errors
-     * @return users page if ok, same page if not ok
+     * @return users view if ok, same view if not ok
      * @throws UserNotFoundException
      */
     @PostMapping("/edit/{id}/save")

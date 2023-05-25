@@ -15,18 +15,17 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class UserDto {
 
-//    private static final int PHONE_NUMBER_MAX_LENGTH = 20;
-//    private static final int PHONE_NUMBER_MIN_LENGTH = 10;
     private static final int PASSWORD_MIN_LENGTH = 3;
     private static final int NAME_MIN_LENGTH = 2;
 
-
     @Size(min = NAME_MIN_LENGTH, message = "Name must be at least " + NAME_MIN_LENGTH + " characters long")
-    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$", message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
+    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$",
+            message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
     private String firstName;
 
     @Size(min = NAME_MIN_LENGTH, message = "Name must be at least " + NAME_MIN_LENGTH + " characters long")
-    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$", message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
+    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$",
+            message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
     private String lastName;
 
 //    @UniqueValue(dataType = DataType.EMAIL)

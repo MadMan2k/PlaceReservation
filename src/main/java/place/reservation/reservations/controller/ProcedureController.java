@@ -28,13 +28,24 @@ public class ProcedureController {
         this.procedureService = procedureServiceInput;
     }
 
+    /**
+     * @param model
+     * @return procedures view
+     */
     @GetMapping(value = {"/", ""})
     public String showProcedures(Model model) {
         List<Procedure> allProcedures = procedureService.getAllProcedures();
+
+//        Collections.sort(allProcedures, Comparator.comparing(Procedure::getName));
+
         model.addAttribute("procedures", allProcedures);
         return "procedures";
     }
 
+    /**
+     * @param model
+     * @return new procedure creation view
+     */
     @GetMapping("/new/")
     public String createNewProcedure(Model model) {
         ProcedureDto procedureDto = new ProcedureDto();
@@ -42,6 +53,11 @@ public class ProcedureController {
         return "newProcedure";
     }
 
+    /**
+     * @param procedureDto
+     * @param errors
+     * @return all procedures view if no errors, otherwise stay at the same view
+     */
     @PostMapping("new/save")
     public String saveProcedure(@Valid ProcedureDto procedureDto, Errors errors) {
 
@@ -57,12 +73,23 @@ public class ProcedureController {
 
     }
 
+    /**
+     * @param id
+     * @return redirect to procedures view
+     * @throws ProcedureNotFoundException
+     */
     @GetMapping("/delete/{id}")
     public String deleteProcedure(@PathVariable("id") long id) throws ProcedureNotFoundException {
         procedureService.deleteProcedure(id);
         return "redirect:/procedures";
     }
 
+    /**
+     * @param id
+     * @param model
+     * @return edit procedure view
+     * @throws ProcedureNotFoundException
+     */
     @GetMapping("edit/{id}")
     public String editProcedure(@PathVariable("id") long id, Model model) throws ProcedureNotFoundException {
         ProcedureDto procedureDto = procedureService.getProcedureById(id);
@@ -70,6 +97,13 @@ public class ProcedureController {
         return "newProcedure";
     }
 
+    /**
+     * @param id
+     * @param procedureDto
+     * @param errors
+     * @return procedures view if ok, same view if not ok
+     * @throws ProcedureNotFoundException
+     */
     @PostMapping("/edit/{id}/save")
     public String updateProcedure(@PathVariable("id") long id,
                                   @Valid @ModelAttribute("procedureDto") ProcedureDto procedureDto,

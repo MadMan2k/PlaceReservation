@@ -20,13 +20,17 @@ import java.time.LocalTime;
 public class RdvDto {
 
     private static final int NAME_MIN_LENGTH = 2;
+    private static final int MINIMUM_DISCOUNT_PERCENTAGE = 0;
+    private static final int MAXIMUM_DISCOUNT_PERCENTAGE = 100;
 
     @Size(min = NAME_MIN_LENGTH, message = "Name must be at least " + NAME_MIN_LENGTH + " characters long")
-    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$", message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
+    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$",
+            message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
     private String clientFirstName;
 
     @Size(min = NAME_MIN_LENGTH, message = "Name must be at least " + NAME_MIN_LENGTH + " characters long")
-    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$", message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
+    @Pattern(regexp = "^[a-zA-Z][-a-zA-Z ]*[a-zA-Z]$",
+            message = "Only latin letters allowed. For compound names hyphen \''-\'' and/or space \'' \'' allowed")
     private String clientLastName;
 
     @NotBlank(message = "Email can not be empty")
@@ -42,7 +46,7 @@ public class RdvDto {
 
     private Procedure procedure;
 
-    @Min(value = 0, message = "Discount must be greater than or equal to 0")
-    @Max(value = 100, message = "Discount must be less than or equal to 100")
+    @Min(value = MINIMUM_DISCOUNT_PERCENTAGE, message = "Discount must be greater than or equal to 0")
+    @Max(value = MAXIMUM_DISCOUNT_PERCENTAGE, message = "Discount must be less than or equal to 100")
     private double discount;
 }

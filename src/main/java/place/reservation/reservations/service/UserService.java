@@ -9,17 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for handling users.
+ */
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Constructor for UserService.
+     *
+     * @param userRepositoryInput the user repository
+     */
     public UserService(UserRepository userRepositoryInput) {
         this.userRepository = userRepositoryInput;
     }
 
     /**
-     * @return list of all users from DB
+     * Retrieves all users.
+     *
+     * @return the list of all users
      */
     public List<User> getAllUsers() {
         Iterable<User> usersIterable = userRepository.findAll();
@@ -35,7 +45,9 @@ public class UserService {
     }
 
     /**
-     * @param userDto
+     * Creates a new user.
+     *
+     * @param userDto the user DTO to save
      */
     public void createNewUser(UserDto userDto) {
         final User user = new User();
@@ -50,8 +62,10 @@ public class UserService {
     }
 
     /**
-     * @param id
-     * @throws UserNotFoundException
+     * Deletes a user by ID.
+     *
+     * @param id the ID of the user to delete
+     * @throws UserNotFoundException if the user is not found
      */
     public void deleteUser(long id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
@@ -63,9 +77,11 @@ public class UserService {
     }
 
     /**
-     * @param id
-     * @return user
-     * @throws UserNotFoundException
+     * Retrieves a user by ID.
+     *
+     * @param id the ID of the user to retrieve
+     * @return the user entity
+     * @throws UserNotFoundException if the user is not found
      */
     public User getUserById(long id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
@@ -77,9 +93,11 @@ public class UserService {
     }
 
     /**
-     * @param id
-     * @return userDTO without password
-     * @throws UserNotFoundException
+     * Retrieves a user DTO without password by ID.
+     *
+     * @param id the ID of the user to retrieve
+     * @return the user DTO without password
+     * @throws UserNotFoundException if the user is not found
      */
     public UserDto getUserDtoWithoutPasswordById(long id) throws UserNotFoundException {
         User user = getUserById(id);
@@ -93,9 +111,11 @@ public class UserService {
     }
 
     /**
-     * @param updatedUserDtoWithoutPassword
-     * @param id
-     * @throws UserNotFoundException
+     * Updates a user.
+     *
+     * @param updatedUserDtoWithoutPassword the updated user DTO without password
+     * @param id                            the ID of the user to update
+     * @throws UserNotFoundException if the user is not found
      */
     public void updateUser(UserDto updatedUserDtoWithoutPassword, long id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
@@ -113,9 +133,11 @@ public class UserService {
     }
 
     /**
-     * @param id
-     * @param email
-     * @return isEmailUnique boolean
+     * Checks if an email is unique.
+     *
+     * @param id    the ID of the user
+     * @param email the email to check
+     * @return true if the email is unique, false otherwise
      */
     public boolean isEmailUnique(long id, String email) {
         Optional<User> user = userRepository.findByEmail(email);
@@ -126,9 +148,11 @@ public class UserService {
     }
 
     /**
-     * @param id
-     * @param phoneNumber
-     * @return isPhoneNumberUnique boolean
+     * Checks if a phone number is unique.
+     *
+     * @param id          the ID of the user
+     * @param phoneNumber the phone number to check
+     * @return true if the phone number is unique, false otherwise
      */
     public boolean isPhoneNumberUnique(long id, String phoneNumber) {
         Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
