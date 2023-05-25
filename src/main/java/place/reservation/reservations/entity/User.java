@@ -3,6 +3,7 @@ package place.reservation.reservations.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import place.reservation.reservations.entity.utils.UserRole;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

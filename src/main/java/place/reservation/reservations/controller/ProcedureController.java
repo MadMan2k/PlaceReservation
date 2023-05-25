@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import place.reservation.reservations.dto.ProcedureDto;
 import place.reservation.reservations.dto.validator.ProcedureValidator;
 import place.reservation.reservations.entity.Procedure;
-import place.reservation.reservations.service.ProcedureNotFoundException;
+import place.reservation.reservations.service.exception.ProcedureNotFoundException;
 import place.reservation.reservations.service.ProcedureService;
 
 import javax.validation.Valid;

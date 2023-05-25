@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import place.reservation.reservations.dto.UserDto;
 import place.reservation.reservations.entity.User;
 import place.reservation.reservations.repository.UserRepository;
+import place.reservation.reservations.service.exception.UserNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

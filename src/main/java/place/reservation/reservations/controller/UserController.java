@@ -14,7 +14,7 @@ import place.reservation.reservations.dto.validator.EmailValidator;
 import place.reservation.reservations.dto.validator.PasswordValidator;
 import place.reservation.reservations.dto.validator.PhoneNumberValidator;
 import place.reservation.reservations.entity.User;
-import place.reservation.reservations.service.UserNotFoundException;
+import place.reservation.reservations.service.exception.UserNotFoundException;
 import place.reservation.reservations.service.UserService;
 
 import javax.validation.Valid;

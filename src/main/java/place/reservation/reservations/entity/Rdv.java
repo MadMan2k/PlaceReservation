@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import place.reservation.reservations.entity.utils.RdvStatus;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

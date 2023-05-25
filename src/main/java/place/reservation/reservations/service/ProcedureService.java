@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import place.reservation.reservations.dto.ProcedureDto;
 import place.reservation.reservations.entity.Procedure;
 import place.reservation.reservations.repository.ProcedureRepository;
+import place.reservation.reservations.service.exception.ProcedureNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
