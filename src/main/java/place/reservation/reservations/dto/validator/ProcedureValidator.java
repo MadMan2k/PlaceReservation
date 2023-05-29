@@ -1,9 +1,6 @@
 package place.reservation.reservations.dto.validator;
 
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.validation.Validator;
 import place.reservation.reservations.dto.ProcedureDto;
 import place.reservation.reservations.service.ProcedureService;
 
