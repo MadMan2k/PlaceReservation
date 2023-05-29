@@ -61,6 +61,8 @@ public class ProcedureController {
     @PostMapping("new/save")
     public String saveProcedure(@Valid ProcedureDto procedureDto, Errors errors) {
 
+        ProcedureValidator.procedureValidation(procedureDto, errors, procedureService);
+
         if (errors.hasErrors()) {
             for (FieldError fe : errors.getFieldErrors()) {
                 System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");

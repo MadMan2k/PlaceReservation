@@ -52,7 +52,8 @@ public class ProcedureService {
      */
     public void saveNewProcedure(ProcedureDto procedureDto) {
         final Procedure procedure = new Procedure();
-        procedure.setName(procedureDto.getName());
+//        procedure.setName(procedureDto.getName());
+        procedure.setName(String.format("%s%s", procedureDto.getName().substring(0, 1).toUpperCase(), procedureDto.getName().substring(1).toLowerCase()));
         procedure.setDurationInMinutes(procedureDto.getDurationInMinutes());
 
         procedureRepository.save(procedure);
@@ -108,6 +109,17 @@ public class ProcedureService {
     }
 
     /**
+     * Checks if a procedure name is unique.
+     *
+     * @param name the name of the procedure
+     * @return true if the name is unique, false otherwise
+     */
+    public boolean isNameUnique(String name) {
+        Optional<Procedure> procedure = procedureRepository.findByName(String.format("%s%s", name.substring(0, 1).toUpperCase(), name.substring(1).toLowerCase()));
+        return procedure.isEmpty();
+    }
+
+    /**
      * Updates a procedure.
      *
      * @param procedureDto the updated procedure DTO
@@ -118,7 +130,7 @@ public class ProcedureService {
         Optional<Procedure> procedure = procedureRepository.findById(id);
         if (procedure.isPresent()) {
             Procedure updatedProcedure = procedure.get();
-            updatedProcedure.setName(procedureDto.getName());
+            updatedProcedure.setName(String.format("%s%s", procedureDto.getName().substring(0, 1).toUpperCase(), procedureDto.getName().substring(1).toLowerCase()));
             updatedProcedure.setPrice(procedureDto.getPrice());
             updatedProcedure.setDurationInMinutes(procedureDto.getDurationInMinutes());
             procedureRepository.save(updatedProcedure);
