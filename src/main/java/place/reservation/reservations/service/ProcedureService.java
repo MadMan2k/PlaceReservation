@@ -100,7 +100,7 @@ public class ProcedureService {
      * @return true if the name is unique, false otherwise
      */
     public boolean isNameUnique(long id, String name) {
-        Optional<Procedure> procedure = procedureRepository.findByName(name);
+        Optional<Procedure> procedure = procedureRepository.findByName(String.format("%s%s", name.substring(0, 1).toUpperCase(), name.substring(1).toLowerCase()));
         if (procedure.isPresent()) {
             return procedure.get().getId().equals(id);
         }
