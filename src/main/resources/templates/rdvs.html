@@ -8,21 +8,23 @@
 <body>
 <div class="container">
   <div class="text-center">
-    <div><h1>Users management</h1></div>
+    <div><h1>RDVs management</h1></div>
     <div class="mb-3"><a th:href="@{/rdvs/new/}" class="h4">Create new RDV</a></div>
     <div>
       <table class="table table-bordered">
         <thead class="table-dark">
         <tr>
           <th>ID</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Duration</th>
           <th>First name</th>
           <th>Last name</th>
           <th>Email</th>
           <th>Phone number</th>
-          <th>Date</th>
           <th>Procedure</th>
-          <th>Time</th>
-          <th>Duration</th>
+          <th>Discount</th>
+          <th>Price</th>
           <th>Status</th>
           <th></th>
         </tr>
@@ -31,14 +33,16 @@
         <th:block th:each="rdv:${rdvs}">
           <tr>
             <td>[[${rdv.id}]]</td>
+            <td th:text="${#temporals.format(rdv.date, 'dd-MM-yyyy')}"></td>
+            <td>[[${rdv.time}]]</td>
+            <td>[[${T(place.reservation.reservations.pojo.DurationUtils).formatDuration(rdv.procedure.durationInMinutes)}]]</td>
             <td>[[${rdv.clientFirstName}]]</td>
             <td>[[${rdv.clientLastName}]]</td>
             <td>[[${rdv.clientEmail}]]</td>
             <td>[[${rdv.clientPhoneNumber}]]</td>
-            <td>[[${rdv.date}]]</td>
             <td>[[${rdv.procedure.name}]]</td>
-            <td>[[${rdv.time}]]</td>
-            <td>[[${rdv.procedure.durationMinutes}]]</td>
+            <td th:text="${T(place.reservation.reservations.pojo.NumberRepresentationUtils).formatNumberForView(rdv.discount)} + ' %'"></td>
+            <td th:text="${T(place.reservation.reservations.pojo.NumberRepresentationUtils).formatNumberForView(rdv.procedure.price)} + ' EUR'"></td>
             <td>[[${rdv.rdvStatus}]]</td>
             <td>
               <a class="btn btn-primary btn-sm" th:href="@{'rdvs/edit/' + ${rdv.id} + '/'}">Edit</a>

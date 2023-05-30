@@ -88,6 +88,7 @@ public class ProcedureService {
         if (procedure.isPresent()) {
             procedureDto.setName(procedure.get().getName());
             procedureDto.setDurationInMinutes(procedure.get().getDurationInMinutes());
+            procedureDto.setPrice(procedure.get().getPrice());
             return procedureDto;
         } else {
             throw new ProcedureNotFoundException("Procedure ID " + id + " not found");

@@ -8,7 +8,7 @@
 <body>
 <div class="container">
   <div class="text-center">
-    <div><h1>Users management</h1></div>
+    <div><h1>Procedures management</h1></div>
     <div class="mb-3"><a th:href="@{/procedures/new/}" class="h4">Create new procedure</a></div>
     <div>
       <table class="table table-bordered">
@@ -26,10 +26,8 @@
           <tr>
             <td>[[${procedure.id}]]</td>
             <td>[[${procedure.name}]]</td>
-<!--            <td>[[${procedure.durationInMinutes + ' min'}]]</td>-->
             <td>[[${T(place.reservation.reservations.pojo.DurationUtils).formatDuration(procedure.durationInMinutes)}]]</td>
-<!--            <td>[[${procedure.price}]]</td>-->
-            <td>[[${#numbers.formatDecimal(procedure.price,1,0) + ' EUR'}]]</td>
+            <td th:text="${T(place.reservation.reservations.pojo.NumberRepresentationUtils).formatNumberForView(procedure.price)} + ' EUR'"></td>
             <td>
               <a class="btn btn-primary btn-sm" th:href="@{'procedures/edit/' + ${procedure.id} + '/'}">Edit</a>
               <a class="btn btn-danger btn-sm"
