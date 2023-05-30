@@ -19,9 +19,11 @@ public class ProcedureValidator {
                                            Errors errors,
                                            ProcedureService procedureService) {
 
-        boolean isNameUnique = procedureService.isNameUnique(procedureDto.getName());
-        if (!isNameUnique) {
-            errors.rejectValue("name", "AlreadyExist.Name", "Procedure name exist already");
+        if (procedureDto.getName() != null && procedureDto.getName().length() >= 2) {
+            boolean isNameUnique = procedureService.isNameUnique(procedureDto.getName());
+            if (!isNameUnique) {
+                errors.rejectValue("name", "AlreadyExist.Name", "Procedure name exist already");
+            }
         }
     }
 }
