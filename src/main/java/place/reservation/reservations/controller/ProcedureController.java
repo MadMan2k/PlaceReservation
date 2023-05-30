@@ -39,7 +39,7 @@ public class ProcedureController {
 //        Collections.sort(allProcedures, Comparator.comparing(Procedure::getName));
 
         model.addAttribute("procedures", allProcedures);
-        return "procedures";
+        return "procedures/procedures";
     }
 
     /**
@@ -50,7 +50,7 @@ public class ProcedureController {
     public String createNewProcedure(Model model) {
         ProcedureDto procedureDto = new ProcedureDto();
         model.addAttribute("procedureDto", procedureDto);
-        return "newProcedure";
+        return "procedures/newProcedure";
     }
 
     /**
@@ -67,7 +67,7 @@ public class ProcedureController {
             for (FieldError fe : errors.getFieldErrors()) {
                 System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");
             }
-            return "newProcedure";
+            return "procedures/newProcedure";
         }
 
         procedureService.saveNewProcedure(procedureDto);
@@ -96,7 +96,7 @@ public class ProcedureController {
     public String editProcedure(@PathVariable("id") long id, Model model) throws ProcedureNotFoundException {
         ProcedureDto procedureDto = procedureService.getProcedureById(id);
         model.addAttribute("procedureDto", procedureDto);
-        return "newProcedure";
+        return "procedures/newProcedure";
     }
 
     /**
@@ -116,7 +116,7 @@ public class ProcedureController {
             for (FieldError fe : errors.getFieldErrors()) {
                 System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");
             }
-            return "newProcedure";
+            return "procedures/newProcedure";
         }
 
         procedureService.updateProcedure(procedureDto, id);

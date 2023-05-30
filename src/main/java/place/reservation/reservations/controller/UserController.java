@@ -38,7 +38,7 @@ public class UserController {
     public String showUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("users", allUsers);
-        return "users";
+        return "users/users";
     }
 
     /**
@@ -49,7 +49,7 @@ public class UserController {
     public String showNewUser(Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("userDto", userDto);
-        return "newUser";
+        return "users/newUser";
     }
 
     /**
@@ -67,7 +67,7 @@ public class UserController {
                 System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");
             }
 
-            return "newUser";
+            return "users/newUser";
         }
 
         userService.createNewUser(userDto);
@@ -95,7 +95,7 @@ public class UserController {
     public String editUser(@PathVariable("id") long id, Model model) throws UserNotFoundException {
         UserDto userDtoWithoutPassword = userService.getUserDtoWithoutPasswordById(id);
         model.addAttribute("userDto", userDtoWithoutPassword);
-        return "newUser";
+        return "users/newUser";
     }
 
     /**
@@ -119,7 +119,7 @@ public class UserController {
                 System.out.println("Field error - '" + fe.getField() + "'; Code error - '" + fe.getCode() + "'");
             }
 
-            return "newUser";
+            return "users/newUser";
         }
 
         userService.updateUser(userDtoWithoutPassword, id);

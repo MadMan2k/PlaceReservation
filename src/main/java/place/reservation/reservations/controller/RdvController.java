@@ -23,6 +23,6 @@ public class RdvController {
     public String showRdvs(Model model) {
         List<Rdv> allRdvs = rdvService.getAllRdvs();
         model.addAttribute("rdvs", allRdvs);
-        return "rdvs";
+        return "rdvs/rdvs";
     }
 }
