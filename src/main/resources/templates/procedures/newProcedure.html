@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
 <head>
   <meta charset="UTF-8">
-  <title>New user</title>
+  <title>New procedure</title>
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
   <link rel="stylesheet" th:href="@{/style.css}" />
 </head>
 <body>
-<div class="container">
+<div layout:fragment="content" class="container">
   <div>
     <h2 class="text-center">Add new procedure</h2>
     <form th:action="@{save}" method="post" th:object="${procedureDto}" style="max-width: 600px; margin: 0 auto;">

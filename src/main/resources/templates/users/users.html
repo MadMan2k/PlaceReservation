@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
 <head>
     <meta charset="UTF-8">
     <title>User management</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
-<div class="container">
+<div layout:fragment="content" class="container">
     <div class="text-center">
         <div><h1>Users management</h1></div>
         <div class="mb-3"><a th:href="@{/users/new/}" class="h4">Create new user</a></div>

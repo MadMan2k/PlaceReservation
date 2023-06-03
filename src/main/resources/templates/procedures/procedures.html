@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
 <head>
   <meta charset="UTF-8">
-  <title>User management</title>
+  <title>Procedures</title>
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
-<div class="container">
+<div layout:fragment="content" class="container">
   <div class="text-center">
     <div><h1>Procedures management</h1></div>
     <div class="mb-3"><a th:href="@{/procedures/new/}" class="h4">Create new procedure</a></div>
