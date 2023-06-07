@@ -4,8 +4,18 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Utility class for formatting durations.
+ */
 public class DurationUtils {
     private static final int MINUTES_IN_HOUR = 60;
+
+    /**
+     * Formats the given duration in minutes.
+     *
+     * @param minutes the duration in minutes to format
+     * @return the formatted duration as a string
+     */
     public static String formatDuration(Integer minutes) {
         Duration duration = Duration.ofMinutes(minutes);
         LocalTime localTime = LocalTime.ofSecondOfDay(duration.getSeconds());
@@ -17,6 +27,6 @@ public class DurationUtils {
             formatter = DateTimeFormatter.ofPattern("HH'h'mm");
             return localTime.format(formatter);
         }
-
     }
 }
+
