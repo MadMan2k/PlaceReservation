@@ -37,6 +37,7 @@ public class UserController {
     @GetMapping(value = {"/", ""})
     public String showUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
+        System.out.println(allUsers);
         model.addAttribute("users", allUsers);
         return "users/users";
     }

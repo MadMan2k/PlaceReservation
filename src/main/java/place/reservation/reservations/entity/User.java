@@ -3,6 +3,8 @@ package place.reservation.reservations.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import place.reservation.reservations.entity.utils.UserRole;
 
 import javax.persistence.Column;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -49,6 +52,23 @@ public class User {
     @NotBlank
     @Column(length = PHONE_NUMBER_MAX_LENGTH, name = "phone_number")
     private String phoneNumber;
+
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @Column(name = "modified_by")
+    private String modifiedBy;
+
+    @Column(name = "modified_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @UpdateTimestamp
+    private LocalDateTime modifiedAt;
+
+    @Column(name = "is_exist")
+    private boolean isExist = true;
 
     @Column(nullable = false, name = "user_role")
     @Enumerated(EnumType.ORDINAL)
