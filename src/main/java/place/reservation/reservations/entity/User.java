@@ -53,6 +53,13 @@ public class User {
     @Column(length = PHONE_NUMBER_MAX_LENGTH, name = "phone_number")
     private String phoneNumber;
 
+    @Column(nullable = false, name = "user_role")
+    @Enumerated(EnumType.ORDINAL)
+    private UserRole userRole;
+
+    @Column(name = "is_exist")
+    private boolean isExist = true;
+
     @Column(name = "created_by")
     private String createdBy;
 
@@ -66,11 +73,4 @@ public class User {
     @Column(name = "modified_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
-
-    @Column(name = "is_exist")
-    private boolean isExist = true;
-
-    @Column(nullable = false, name = "user_role")
-    @Enumerated(EnumType.ORDINAL)
-    private UserRole userRole;
 }

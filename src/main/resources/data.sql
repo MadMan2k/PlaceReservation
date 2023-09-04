@@ -23,5 +23,5 @@ INSERT INTO procedures (name, duration_in_minutes, price) VALUES ('Mask', 30, 15
 INSERT INTO procedures (name, duration_in_minutes, price) VALUES ('RESERVATION', 60, 0);
 
 
-INSERT INTO rdvs (client_first_name, client_last_name, client_email, client_phone_number, date, time, procedures_id, rdv_status, discount)
-VALUES  ('Emmanuel', 'Macron', 'emacron@gmail.com', '01 02 03 04 05', '2023-05-01', '10:00', (SELECT id FROM procedures WHERE name = 'Health cocktail'), 0, 10.5)
+INSERT INTO rdvs (client_first_name, client_last_name, client_email, client_phone_number, date, time, procedures_id, rdv_status, discount,  created_by, modified_by)
+VALUES  ('Emmanuel', 'Macron', 'emacron@gmail.com', '01 02 03 04 05', '2023-05-01', '10:00', (SELECT id FROM procedures WHERE name = 'Health cocktail'), 0, 10.5, 'SYSTEM', 'SYSTEM')
