@@ -7,6 +7,7 @@ import place.reservation.reservations.repository.UserRepository;
 import place.reservation.reservations.service.exception.UserNotFoundException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,8 @@ public class UserService {
                 userList.add(user);
             }
         }
+
+        Collections.sort(userList);
 
         return userList;
     }

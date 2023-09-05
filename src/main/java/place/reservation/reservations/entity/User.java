@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Comparable<User> {
 
     private static final int TEXT_FIELD_MAX_LENGTH = 70;
     private static final int PHONE_NUMBER_MAX_LENGTH = 20;
@@ -73,4 +73,16 @@ public class User {
     @Column(name = "modified_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
+
+
+    @Override
+    public int compareTo(User user) {
+        if (this.getModifiedAt().isAfter(user.modifiedAt)) {
+            return -1;
+        } else if (this.getModifiedAt().isBefore(user.modifiedAt)){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
